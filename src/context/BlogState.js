@@ -1,8 +1,8 @@
 import { useState } from "react";
 import BlogContext from "./BlogContext";
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
 const BlogState = (props) => {
-	const host = "http://localhost:5000/"
 	const blogsInitial = []
 
 	const [blogs, setBlogs] = useState(blogsInitial)
@@ -10,7 +10,7 @@ const BlogState = (props) => {
 
 	// Get All Blogs
 	const getAllBlogs = async () => {
-		const response = await fetch(`${host}api/blogs/`, {
+		const response = await fetch(`${API_BASE_URL}api/blogs/`, {
 			method: "GET",
 			headers: {
 				"Content-Type": "application/json",
@@ -24,7 +24,7 @@ const BlogState = (props) => {
 	// Create Blog
 	const createBlog = async (title, content, category, blogImage) => {
 		const author = localStorage.getItem("username");
-		const response = await fetch(`${host}api/blogs/createblog`, {
+		const response = await fetch(`${API_BASE_URL}api/blogs/createblog`, {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
@@ -60,7 +60,7 @@ const BlogState = (props) => {
 			return;
 		}
 
-		const response = await fetch(`${host}api/blogs/${id}`, {
+		const response = await fetch(`${API_BASE_URL}api/blogs/${id}`, {
 			method: 'DELETE',
 			headers: {
 				'Content-Type': 'application/json',
@@ -82,7 +82,7 @@ const BlogState = (props) => {
 	const [blog, setBlog] = useState(null)
 	// Get Blog by id
 	const getBlogByID = async (id) => {
-		const response = await fetch(`${host}api/blogs/${id}`, {
+		const response = await fetch(`${API_BASE_URL}api/blogs/${id}`, {
 			method: "GET",
 			headers: {
 				"Content-Type": "application/json",
@@ -95,7 +95,7 @@ const BlogState = (props) => {
 
 	// Get Specific user Blogs
 	const userBlogs = async (id) => {
-		const response = await fetch(`${host}api/blogs/user/${id}`, {
+		const response = await fetch(`${API_BASE_URL}api/blogs/user/${id}`, {
 			method: "GET",
 			headers: {
 				"Content-Type": "application/json",
@@ -108,7 +108,7 @@ const BlogState = (props) => {
 	}
 
 	const searchBlogs = async (query) => {
-		const response = await fetch(`${host}api/blogs/search?q=${query}`, {
+		const response = await fetch(`${API_BASE_URL}api/blogs/search?q=${query}`, {
 			method: "GET",
 			headers: {
 				"Content-Type": "application/json",

@@ -22,5 +22,6 @@ router.get('/user', authMiddleware.required, authController.getUserDetails);
 router.post('/updateProfilePicture', authMiddleware.required, upload.single('profilePicture'), authController.updateProfilePicture);
 router.post('/forgot-password', authController.forgotPassword)
 router.put('/reset-password', authController.resetPassword)
+router.post('/validate-token', authController.validateToken);
 
 module.exports = router;

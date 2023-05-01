@@ -2,9 +2,9 @@ import React, { useState, useEffect, useContext } from "react";
 import AuthContext from "./AuthContext";
 import { useNavigate } from 'react-router-dom';
 import AlertContext from "./AlertContext";
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
 const AuthState = (props) => {
-    const host = "http://localhost:5000/"
     const navigate = useNavigate();
     const { showAlert } = useContext(AlertContext);
 
@@ -32,8 +32,19 @@ const AuthState = (props) => {
         setIsAuthenticated(status);
     };
 
+    const checkTokenValidity = async (token) => {
+        try {
+            const response = await fetch(`${API_BASE_URL}api/auth/validate-token`, {
+                headers: { Authorization: token }
+            });
+            return response.status === 200;
+        } catch (err) {
+            return false;
+        }
+    };
+
     const login = async () => {
-        const response = await fetch(`${host}api/auth/login`, {
+        const response = await fetch(`${API_BASE_URL}api/auth/login`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -58,7 +69,7 @@ const AuthState = (props) => {
     }
 
     const signup = async () => {
-        const response = await fetch(`${host}api/auth/register`, {
+        const response = await fetch(`${API_BASE_URL}api/auth/register`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -82,7 +93,7 @@ const AuthState = (props) => {
     }
 
     const getUser = async () => {
-        const response = await fetch(`${host}api/auth/user`, {
+        const response = await fetch(`${API_BASE_URL}api/auth/user`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -102,14 +113,17 @@ const AuthState = (props) => {
             localStorage.removeItem('userId')
             localStorage.removeItem('username')
 
-            navigate("/")
+            setEmail("")
+            setPassword("")
+
+            navigate("/login")
 
             showAlert("You have been logged out successfully", "success")
         }
     }
 
     const forgotPassword = async () => {
-        const response = await fetch(`${host}api/auth/forgot-password`, {
+        const response = await fetch(`${API_BASE_URL}api/auth/forgot-password`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -126,7 +140,7 @@ const AuthState = (props) => {
 
     const resetPassword = async (token) => {
         try {
-            const response = await fetch(`${host}api/auth/reset-password`, {
+            const response = await fetch(`${API_BASE_URL}api/auth/reset-password`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ password, token }),
@@ -144,7 +158,7 @@ const AuthState = (props) => {
 
     const updateProfilePicture = async (formData) => {
         try {
-            const response = await fetch(`${host}api/auth/updateProfilePicture`, {
+            const response = await fetch(`${API_BASE_URL}api/auth/updateProfilePicture`, {
                 method: 'POST',
                 headers: {
                     "Authorization": localStorage.getItem('token'),
@@ -166,7 +180,7 @@ const AuthState = (props) => {
     };
 
     return (
-        <AuthContext.Provider value={{ isAuthenticated, setAuth, setEmail, login, setPassword, email, password, username, setUsername, signup, user, setUser, getUser, logout, forgotPassword, selectedFile, setSelectedFile, updateProfilePicture, confirmPassword, setConfirmPassword, error, setError, loading, setLoading, resetPassword }}>
+        <AuthContext.Provider value={{ isAuthenticated, setAuth, setEmail, login, setPassword, email, password, username, setUsername, signup, user, setUser, getUser, logout, forgotPassword, selectedFile, setSelectedFile, updateProfilePicture, confirmPassword, setConfirmPassword, error, setError, loading, setLoading, resetPassword, checkTokenValidity }}>
             {props.children}
         </AuthContext.Provider>
     )

@@ -23,11 +23,11 @@ const About = () => {
                                     <br /><br />
                                     <strong>Devesh – Founder and Chief Editor</strong>
                                     <br /><br />
-                                    Devesh is the driving force behind DevBlogs. With a passion for storytelling and a background in [relevant background or profession], Devesh began this blog as a way to share insights, knowledge, and personal experiences with the world. Today, DevBlogs has grown into a thriving online community, thanks to the dedication and hard work of Devesh and the talented team of writers and contributors.
+                                    Devesh is the driving force behind DevBlogs. With a passion for storytelling and a background in Computer Science and Business, Devesh began this blog as a way to share insights, knowledge, and personal experiences with the world. Today, DevBlogs has grown into a thriving online community, thanks to the dedication and hard work of Devesh and the talented team of writers and contributors.
                                     <br /><br />
                                     <strong>Ankit – Senior Writer</strong>
                                     <br /><br />
-                                    Ankit is a versatile writer with a knack for turning complex ideas into relatable and engaging content. With expertise in [relevant topics or industries], Ankit brings a wealth of knowledge and experience to the team, consistently delivering high-quality articles that captivate and inspire readers.
+                                    Ankit is a versatile writer with a knack for turning complex ideas into relatable and engaging content. With expertise in Web Development and Marketing, Ankit brings a wealth of knowledge and experience to the team, consistently delivering high-quality articles that captivate and inspire readers.
                                     <br /><br />
                                     <strong>Prince – Junior Writer</strong>
                                     <br /><br />
@@ -41,10 +41,10 @@ const About = () => {
                                     <br /><br />
                                     Stay connected with DevBlogs by following us on social media:
                                     <br /><br />
-                                    Facebook: [Facebook Page URL] <br />
-                                    Twitter: [@YourBlogTwitterHandle] <br />
-                                    Instagram: [@YourBlogInstagramHandle]<br />
-                                    LinkedIn: [LinkedIn Page URL]<br /><br />
+                                    Facebook:  <br />
+                                    Twitter:  <br />
+                                    Instagram: <br />
+                                    LinkedIn: <br /><br />
                                     Happy reading!
                                 </p>
                             </div>

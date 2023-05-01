@@ -28,9 +28,9 @@ const Sidebar = () => {
         <div className="col-md-3 ms-auto">
             <aside className="sidebar">
                 <div class="input-group">
-                    <div class="form-outline d-flex">
+                    <div class="form-outline d-flex justify-content-center align-items-center">
                         <input id="search-focus" type="search" class="form-control" onChange={handleSearchChange} />
-                        <button className='btn btn-primary' onClick={handleSearch}><i class="fas fa-search"></i></button>
+                        <Link onClick={handleSearch}><i class="fas fa-search fa-lg mx-2"></i></Link>
                     </div>
                 </div>
                 <div className="card mb-4">

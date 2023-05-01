@@ -7,7 +7,7 @@ const userSchema = new Schema({
 	password: { type: String, required: true },
 	profilePicture: {
 		type: String,
-		default: '../img/default.jpg',
+		default: null,
 	},
 	createdAt: { type: Date, default: Date.now },
 	resetToken: { type: String, default: null },

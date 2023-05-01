@@ -4,16 +4,18 @@ import ProfileDropdown from './ProfileDropdown';
 import AuthContext from '../context/AuthContext';
 
 const Navbar = () => {
-    const { setAuth } = useContext(AuthContext);
+    const { setAuth, checkTokenValidity } = useContext(AuthContext);
 
+    const token = localStorage.getItem("token");
     useEffect(() => {
-        const token = localStorage.getItem("token");
-        if (token) {
-            setAuth(true);
-        } else {
-            setAuth(false);
+        const checkToken = async () => {
+            if (token && await checkTokenValidity(token)) {
+                setAuth(true);
+            } else {
+                setAuth(false);
+            }
         }
-    }, [setAuth]);
+    }, [setAuth, checkTokenValidity, token])
 
     return (
         <div>

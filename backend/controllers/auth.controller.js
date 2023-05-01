@@ -129,7 +129,7 @@ exports.forgotPassword = async (req, res) => {
 
         user.resetToken = resetToken;
         user.resetTokenExpires = Date.now() + 3600000;
-        
+
         await user.save();
 
         const transporter = nodemailer.createTransport({
@@ -183,4 +183,19 @@ exports.resetPassword = async (req, res) => {
         console.error('Error in resetPassword:', error);
         res.status(500).json({ message: 'Internal server error' });
     }
+};
+
+exports.validateToken = (req, res) => {
+    const token = req.headers.authorization;
+
+    if (!token) {
+        return res.status(401).json({ message: 'No token provided' });
+    }
+
+    jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+        if (err) {
+            return res.status(401).json({ message: 'Invalid token' });
+        }
+        res.status(200).json({ message: 'Token is valid' });
+    });
 };
